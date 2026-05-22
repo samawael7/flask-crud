@@ -6,7 +6,7 @@ pipeline {
             steps {
                 cleanWs()
                 echo 'Cloning from GitHub...'
-                git branch: 'main', url: git branch: 'main', url:'https://github.com/samawael7/flask-crud.git'
+                git branch: 'main', url:'https://github.com/samawael7/flask-crud.git'
             }
         }
 
