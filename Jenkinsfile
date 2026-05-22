@@ -6,28 +6,23 @@ pipeline {
             steps {
                 cleanWs()
                 echo 'Cloning from GitHub...'
-                git branch: 'main', url:'https://github.com/samawael7/flask-crud.git'
+                git branch: 'main', url: 'https://github.com/samawael7/flask-crud.git'
             }
         }
 
         stage('Build') {
-    steps {
-        echo 'Building Docker image...'
-        sh 'docker build --no-cache -t flask-crud:${BUILD_NUMBER} .'
-    }
-}
+            steps {
+                echo 'Building Docker image...'
+                sh 'docker build --no-cache -t flask-crud:${BUILD_NUMBER} .'
+            }
+        }
 
         stage('Test') {
-    steps {
-        echo 'Running tests...'
-        sh '''
-            docker run --rm \
-            -v ${WORKSPACE}/tests:/tests \
-            flask-crud:${BUILD_NUMBER} \
-            python -m pytest /tests/ -v
-        '''
-    }
-}
+            steps {
+                echo 'Running tests...'
+                sh 'docker run --rm -v ${WORKSPACE}/tests:/tests --user root flask-crud:${BUILD_NUMBER} python -m pytest /tests/ -v'
+            }
+        }
 
         stage('Deploy') {
             steps {
