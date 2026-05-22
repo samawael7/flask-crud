@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3, os
 
-app = Flask(__name__)
-DB = 'tasks.db'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB = os.path.join(BASE_DIR, 'tasks.db')
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
+app = Flask(__name__, template_folder=TEMPLATE_DIR)
 
 def get_db():
     conn = sqlite3.connect(DB)
