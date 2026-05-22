@@ -11,11 +11,11 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                echo 'Building Docker image...'
-                sh 'docker build -t flask-crud:${BUILD_NUMBER} .'
-            }
-        }
+    steps {
+        echo 'Building Docker image...'
+        sh 'docker build --no-cache -t flask-crud:${BUILD_NUMBER} .'
+    }
+}
 
         stage('Test') {
     steps {
