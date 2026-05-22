@@ -18,11 +18,11 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                echo 'Running tests...'
-                sh 'docker run --rm -v ${WORKSPACE}/tests:/tests --user root flask-crud:${BUILD_NUMBER} python -m pytest /tests/ -v'
-            }
-        }
+    steps {
+        echo 'Running tests...'
+        sh 'docker run --rm flask-crud:${BUILD_NUMBER} python -m pytest /tests/ -v'
+    }
+}
 
         stage('Deploy') {
             steps {
